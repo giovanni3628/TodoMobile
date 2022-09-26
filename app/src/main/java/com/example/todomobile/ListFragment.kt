@@ -7,9 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.todomobile.adapter.TarefaAdapter
+import com.example.todomobile.databinding.FragmentListBinding
+import com.example.todomobile.model.Tarefa
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListFragment : Fragment() {
+
+    private lateinit var binding: FragmentListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -17,14 +23,46 @@ class ListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        val view = inflater.inflate(R.layout.fragment_list, container, false)
+        binding = FragmentListBinding.inflate(layoutInflater, container, false)
 
-        val floatindAdd =  view.findViewById<FloatingActionButton>(R.id.floatingAdd)
 
-        floatindAdd.setOnClickListener {
+        val listTarefas = listOf(
+            Tarefa(
+                "Lavar a louça",
+                "Lavar a louça o dia inteiro",
+                "Giovanni",
+                "2022-09-26",
+                false,
+                "Dia a Dia"
+            ), Tarefa(
+                "Ir ao cinema",
+                "Assistir filme",
+                "Giovanni",
+                "2022-09-29",
+                false,
+                "Lazer"
+            ), Tarefa(
+                "Passear com o cachorro",
+                "Levar o cachorro passear no bairro",
+                "Giovanni",
+                "2022-09-227",
+                true,
+                "Cuidados com o cachorro"
+            ),
+        )
+
+        //Configuração do RecyclerView
+        val adapter = TarefaAdapter()
+        binding.recyclerTarefa.layoutManager = LinearLayoutManager(context)
+        binding.recyclerTarefa.adapter = adapter
+        binding.recyclerTarefa.setHasFixedSize(true)
+
+        adapter.setList(listTarefas)
+
+        binding.floatingAdd.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_formFragment)
         }
 
-        return view
+        return binding.root
     }
 }
