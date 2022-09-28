@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todomobile.adapter.TarefaAdapter
 import com.example.todomobile.databinding.FragmentListBinding
+import com.example.todomobile.model.Categoria
 import com.example.todomobile.model.Tarefa
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -28,26 +29,13 @@ class ListFragment : Fragment() {
 
         val listTarefas = listOf(
             Tarefa(
-                "Lavar a louça",
+                1,
+                "Giovanni",
                 "Lavar a louça o dia inteiro",
                 "Giovanni",
                 "2022-09-26",
                 false,
-                "Dia a Dia"
-            ), Tarefa(
-                "Ir ao cinema",
-                "Assistir filme",
-                "Giovanni",
-                "2022-09-29",
-                false,
-                "Lazer"
-            ), Tarefa(
-                "Passear com o cachorro",
-                "Levar o cachorro passear no bairro",
-                "Giovanni",
-                "2022-09-227",
-                true,
-                "Cuidados com o cachorro"
+                
             ),
         )
 
