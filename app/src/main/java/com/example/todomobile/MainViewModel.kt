@@ -11,15 +11,16 @@ import com.example.todomobile.model.Tarefa
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import java.lang.Exception
 import java.time.LocalDate
 import javax.inject.Inject
+import kotlin.Exception
 
 @HiltViewModel
 class MainViewModel @Inject constructor (
     private val repository: Repository
         ): ViewModel() {
 
+    var tarefaSelecionada: Tarefa? = null
 
 
     private val _myCategoriaResponse =
@@ -69,6 +70,17 @@ class MainViewModel @Inject constructor (
                 val response = repository.listTarefa()
                 _myTarefaResponse.value = response
 
+            }catch (e: Exception){
+                Log.d("Erro", e.message.toString())
+            }
+        }
+    }
+
+    fun updateTarefa(tarefa: Tarefa){
+        viewModelScope.launch {
+            try {
+                repository.updateTarefa(tarefa)
+                listTarefa()
             }catch (e: Exception){
                 Log.d("Erro", e.message.toString())
             }
